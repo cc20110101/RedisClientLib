@@ -57,7 +57,14 @@ void RedisTransMgr::write(const QString &str)
 
 bool RedisTransMgr::isOpen()
 {
-    return _socket->isValid();
+    if(_socket->state() == QAbstractSocket::ConnectedState)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void RedisTransMgr::setHostAddress(const QString &hostAddress)
